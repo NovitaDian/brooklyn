@@ -1,0 +1,151 @@
+/* FONT & GLOBAL */
+body{
+    font-family: 'Poppins', sans-serif;
+    color:#2b2b2b;
+}
+
+.section{
+    padding:100px 0;
+}
+
+.gold{ color:#c9a14a; }
+
+h1,h2,h3,h4{
+    font-weight:700;
+}
+
+/* HERO */
+.hero{
+    position:relative;
+    height:90vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    color:white;
+}
+
+.hero::after{
+    content:'';
+    position:absolute;
+    inset:0;
+    background:rgba(11,28,45,.78);
+}
+
+.hero .content{
+    position:relative;
+    z-index:2;
+}
+
+.hero h1{
+    font-size:56px;
+    letter-spacing:1px;
+}
+
+.hero p{
+    font-size:20px;
+    opacity:.9;
+}
+
+/* BUTTON */
+.btn-gold{
+    background:#c9a14a;
+    color:white;
+    padding:12px 30px;
+    border-radius:8px;
+    font-weight:600;
+    transition:.3s;
+}
+.btn-gold:hover{
+    background:#b88d36;
+    transform:translateY(-2px);
+}
+
+/* UNIT CARD */
+.unit-card img{
+    height:280px;
+    object-fit:cover;
+    border-radius:12px;
+}
+
+.unit-card .bg-white{
+    border-radius:12px;
+}
+
+/* SITEPLAN */
+.siteplan-wrapper{
+    position:relative;
+    max-width:1000px;
+    margin:auto;
+}
+
+.siteplan-wrapper img{
+    border-radius:12px;
+    box-shadow:0 10px 30px rgba(0,0,0,.15);
+}
+
+.siteplan-dot{
+    position:absolute;
+    transform:translate(-50%,-50%);
+    width:22px;
+    height:22px;
+    border-radius:50%;
+    border:2px solid white;
+    cursor:pointer;
+    transition:.2s;
+}
+.siteplan-dot:hover{
+    transform:translate(-50%,-50%) scale(1.3);
+}
+
+/* PROGRESS */
+.progress-box{
+    background:white;
+    border-radius:12px;
+    padding:30px;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+}
+.progress-box h3{
+    font-size:40px;
+}
+
+/* MAP */
+iframe{
+    border-radius:12px;
+    box-shadow:0 10px 30px rgba(0,0,0,.15);
+}
+
+/* FLOAT WA */
+.wa-float{
+    position:fixed;
+    bottom:25px;
+    right:25px;
+    width:65px;
+    height:65px;
+    border-radius:50%;
+    background:#25D366;
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:30px;
+    box-shadow:0 10px 25px rgba(0,0,0,.3);
+    z-index:999;
+    transition:.3s;
+}
+.wa-float:hover{
+    transform:scale(1.1);
+}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+    .hero h1{
+        font-size:34px;
+    }
+    .hero{
+        height:70vh;
+    }
+    .section{
+        padding:60px 0;
+    }
+}
