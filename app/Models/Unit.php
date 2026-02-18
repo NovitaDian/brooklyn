@@ -24,11 +24,10 @@ class Unit extends Model
         'km',
         'foto',
         'denah',
-        'detail1',
-        'detail2',
-        'detail3',
-        'detail4',
-        'detail5',
-        'detail6',
+        'harga',
     ];
+    public function images()
+    {
+        return $this->hasMany(UnitImage::class);
+    }
 }

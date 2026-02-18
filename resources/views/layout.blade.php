@@ -6,8 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Inter&display=swap" rel="stylesheet">
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
 
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <style>
@@ -34,6 +39,30 @@
         h3 {
             font-family: 'Playfair Display', serif;
             margin-bottom: 20px;
+        }
+
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+            padding: 10px 22px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: 0.3s;
+        }
+
+        .btn-back i {
+            font-size: 18px;
+        }
+
+        .btn-back:hover {
+            background: #d4af37;
+            color: white;
+            transform: translateY(-2px);
         }
 
         /* ================= COLOR & BUTTON ================= */
@@ -105,33 +134,111 @@
             color: #fff;
         }
 
-        /* ================= HERO ================= */
-        .hero,
+        /* RESET */
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        /* HERO FULL */
         .hero-brooklyn {
-            background: linear-gradient(rgba(11, 28, 45, .75), rgba(11, 28, 45, .75)),
-                url('/images/brooklyn.jpg') center/cover no-repeat;
-            color: #fff;
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* SLIDER */
+        .carousel,
+        .carousel-inner,
+        .carousel-item {
+            height: 100%;
+        }
+
+        /* BACKGROUND */
+        .hero-slide {
+            height: 100vh;
+            width: 100%;
+            background-position: center;
+            position: relative;
+        }
+
+        /* OVERLAY */
+        .hero-slide::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+
+        /* TEXT CENTER */
+        .hero-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             text-align: center;
+            color: white;
+            z-index: 5;
+            width: 100%;
         }
 
-        .hero {
-            padding: 200px 10%;
-        }
-
-        .hero-brooklyn {
-            padding: 180px 0;
-        }
-
+        /* TITLE */
         .hero-title {
-            font-size: 56px;
-            font-weight: 700;
+            font-size: 64px;
+            font-weight: 600;
         }
 
+        /* SUB */
         .hero-sub {
-            font-size: 22px;
-            margin: 20px 0 35px;
-            opacity: .9
+            letter-spacing: 4px;
+            margin-top: 10px;
         }
+
+        /* GOLD */
+        .gold {
+            color: #d4af37;
+        }
+
+        /* KONTAK */
+        .hero-bottom {
+            position: absolute;
+            bottom: 40px;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            z-index: 6;
+        }
+
+        /* BOX */
+        .contact-box {
+            background: rgba(255, 255, 255, 0.92);
+            padding: 15px 40px;
+            border-radius: 50px;
+            display: flex;
+            gap: 35px;
+            font-weight: 500;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        /* MOBILE */
+        @media(max-width:768px) {
+            .hero-title {
+                font-size: 36px;
+            }
+
+            .contact-box {
+                flex-direction: column;
+                border-radius: 20px;
+                gap: 5px;
+                padding: 12px 20px;
+            }
+        }
+
 
         /* ================= GRID & CARD UMUM ================= */
         .grid {
@@ -780,6 +887,49 @@
             font-size: 18px;
         }
 
+        .hero-brooklyn {
+            position: relative;
+            height: 100vh;
+        }
+
+        .carousel,
+        .carousel-inner,
+        .carousel-item {
+            height: 100vh;
+        }
+
+        .hero-bg {
+            height: 100vh;
+            width: 100%;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        /* overlay gelap biar tulisan jelas */
+        .hero-bg::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.45);
+        }
+
+        .hero-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            width: 100%;
+            padding: 20px;
+        }
+
+
+        .gold {
+            color: #d4af37;
+        }
+
+
         /* Responsive */
         @media(max-width:768px) {
             .kpr-wrapper {
@@ -811,6 +961,8 @@
     </script>
     <script src="{{ asset('js/kpr.js') }}"></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
 

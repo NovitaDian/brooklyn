@@ -39,12 +39,6 @@ return new class extends Migration
             // Foto
             $table->string('foto');
             $table->string('denah')->nullable();
-            $table->string('detail1')->nullable();
-            $table->string('detail2')->nullable();
-            $table->string('detail3')->nullable();
-            $table->string('detail4')->nullable();
-            $table->string('detail5')->nullable();
-            $table->string('detail6')->nullable();
             $table->timestamps();
         });
     }

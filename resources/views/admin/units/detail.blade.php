@@ -3,11 +3,12 @@
 @section('content')
 
 @php
-$wa = '6282324898151'; // GANTI nomor WA Brooklyn (pakai 62)
+$wa = '6282324898151'; 
 @endphp
 <div class="wrapper">
-    <a href="{{ url()->previous() }}" class="back-btn">
-        ← Kembali
+    <a href="{{ url()->previous() }}" class="btn-back">
+        <i class="bi bi-arrow-left"></i>
+        Kembali
     </a>
 
 
@@ -57,16 +58,37 @@ $wa = '6282324898151'; // GANTI nomor WA Brooklyn (pakai 62)
 
     <div class="row g-4 gallery">
 
-        @for($i=1;$i<=12;$i++)
-            @php $f='detail' .$i; @endphp
-            @if($unit->$f)
-            <div class="col-md-4">
-                <img src="{{ asset('storage/'.$unit->$f) }}">
-            </div>
-            @endif
-            @endfor
+        @forelse($unit->images as $img)
+        <div class="col-md-4">
+            <img src="{{ asset('storage/'.$img->image) }}"
+                class="w-100 rounded shadow gallery-img"
+                data-bs-toggle="modal"
+                data-bs-target="#imageModal">
+        </div>
+        @empty
+        <div class="text-center text-muted">
+            Belum ada foto interior
+        </div>
+        @endforelse
 
     </div>
+
+    <!-- Modal Fullscreen -->
+    <div class="modal fade" id="imageModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content bg-dark border-0">
+
+                <button type="button" class="btn-close btn-close-white ms-auto m-3"
+                    data-bs-dismiss="modal"></button>
+
+                <div class="modal-body text-center">
+                    <img id="modalImage" class="img-fluid rounded">
+                </div>
+
+            </div>
+        </div>
+    </div>
+
     @php
     $tanya = urlencode("Halo Admin Brooklyn Townhouse,
 
@@ -108,5 +130,12 @@ $wa = '6282324898151'; // GANTI nomor WA Brooklyn (pakai 62)
 
 
 </div>
+<script>
+    document.querySelectorAll('.gallery-img').forEach(img => {
+        img.addEventListener('click', function() {
+            document.getElementById('modalImage').src = this.src;
+        });
+    });
+</script>
 
 @endsection

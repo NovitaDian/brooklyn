@@ -5,13 +5,49 @@
 $wa = '6282324898151';
 @endphp
 
-{{-- HERO --}}
+{{-- HERO SLIDER --}}
 <section class="hero-brooklyn">
-    <div class="container text-center text-white">
+
+    <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
+
+        <div class="carousel-inner">
+
+            <div class="carousel-item active">
+                <div class="hero-slide" style="background-image:url('{{ asset('images/hero1.jpg') }}')"></div>
+            </div>
+
+            <div class="carousel-item">
+                <div class="hero-slide" style="background-image:url('{{ asset('images/hero2.jpg') }}')"></div>
+            </div>
+            <div class="carousel-item">
+                <div class="hero-slide" style="background-image:url('{{ asset('images/hero3.jpg') }}')"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- TEXT -->
+    <div class="hero-content">
         <h1 class="hero-title gold">Brooklyn Townhouse</h1>
         <p class="hero-sub">SMART PRESTIGIOUS LIVING</p>
     </div>
+
+    <!-- KONTAK -->
+    <div class="hero-bottom">
+        <div class="contact-box">
+            <div>📷 brooklyntownhouseclp_official</div>
+            <div>📞 0823-2489-8151</div>
+            <div>📍 Jl.Rinjani, Sidanegara, RT 02, RW 22 Kec. Cilacap Tengah, Cilacap</div>
+        </div>
+    </div>
+
 </section>
+
+
+
+
+
 
 {{-- TENTANG --}}
 <section class="fasilitas">
@@ -69,7 +105,7 @@ $wa = '6282324898151';
     <div class="container">
         <h2 class="gold text-center">Mengapa Memilih Brooklyn Townhouse?</h2>
         <p class="text-center why-sub">
-            Bukan hanya rumah, tetapi lingkungan hunian yang dirancang untuk kenyamanan,
+            Bukan sekedar tempat tinggal, tetapi lingkungan hunian yang dirancang untuk kenyamanan,
             keamanan, dan nilai investasi jangka panjang.
         </p>
 
@@ -79,7 +115,7 @@ $wa = '6282324898151';
                     <i class="fa-solid fa-house-flood-water"></i>
                 </div>
                 <h4>Bebas Risiko Banjir</h4>
-                <p>Kontur tanah telah ditinggikan sebelum pembangunan sehingga posisi rumah lebih tinggi dari lingkungan sekitar.</p>
+                <p>Kontur tanah telah ditinggikan dari jalan utama sebelum pembangunan sehingga posisi kawasan lebih tinggi dari lingkungan sekitar.</p>
             </div>
 
             <div class="why-card">
@@ -87,7 +123,7 @@ $wa = '6282324898151';
                     <i class="fa-solid fa-location-dot"></i>
                 </div>
                 <h4>Lokasi Pusat Kota</h4>
-                <p>Hanya beberapa menit menuju sekolah, rumah sakit, pasar, terminal, dan pusat aktivitas kota Cilacap.</p>
+                <p>Memudahkan akses untuk menjangkau ke berbagai fasilitas umum, pelayanan kesehatan, pendidikan, dan pusat perbelanjaan.</p>
             </div>
 
             <div class="why-card">
@@ -95,15 +131,15 @@ $wa = '6282324898151';
                     <i class="fa-solid fa-gem"></i>
                 </div>
                 <h4>Desain Modern Premium</h4>
-                <p>Mengusung konsep modern elegan dengan material pilihan dan kualitas pengerjaan profesional.</p>
+                <p>Mengusung konsep modern elegan dengan material kualitas premium yang dikerjakan secara profesional setiap detailnya.</p>
             </div>
 
             <div class="why-card">
                 <div class="why-icon">
-                    <i class="fa-solid fa-chart-line"></i>
+                    <i class="fa-solid fa-arrow-up-right-dots"></i>
                 </div>
                 <h4>Nilai Investasi Tinggi</h4>
-                <p>Berlokasi di area strategis yang terus berkembang dengan potensi kenaikan nilai properti setiap tahunnya.</p>
+                <p>Berlokasi di area strategis dengan potensi kenaikan nilai properti yang signifikan setiap tahunnya.</p>
             </div>
         </div>
     </div>
@@ -229,8 +265,8 @@ $wa = '6282324898151';
 </section>
 
 <section class="cta">
-    <h2>Wujudkan Rumah Impian Anda Sekarang</h2>
-    <p>Pilih unit terbaik Anda sebelum kehabisan.</p>
+    <h2>Wujudkan Rumah Impian Bapak/Ibu Sekarang</h2>
+    <p>Pilih unit terbaik Bapak/Ibu sebelum kehabisan.</p>
 </section>
 <section class="payment-section py-5">
     <div class="container">
@@ -239,7 +275,7 @@ $wa = '6282324898151';
             <h2 class="text-center gold mb-5">Metode Pembayaran</h2>
             <p class="section-sub">
                 Kami menyediakan beberapa pilihan metode pembayaran yang fleksibel
-                dan bisa disesuaikan dengan kebutuhan Anda.
+                dan bisa disesuaikan dengan kebutuhan Bapak/Ibu.
             </p>
         </div>
 

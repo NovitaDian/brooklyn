@@ -20,6 +20,7 @@
                         <input name="nama" class="form-control" placeholder="Contoh: Type Crown">
                     </div>
                     <div class="col-md-6 mb-3">
+                        <label class="form-label">Harga</label>
                         <input
                             type="text"
                             name="harga"
@@ -102,16 +103,23 @@
 
                 <hr>
 
+
                 <h5 class="fw-bold mb-3 text-warning">Detail Interior (Opsional)</h5>
 
-                <div class="row">
-                    @for($i=1; $i<=6; $i++)
-                        <div class="col-md-4 mb-4">
-                        <label class="form-label">Detail {{ $i }}</label>
-                        <input type="file" name="detail{{ $i }}" class="form-control img-input" data-preview="preview_detail{{ $i }}">
-                        <img id="preview_detail{{ $i }}" class="img-preview mt-2">
+                <div id="image-wrapper">
+
+                    <div class="mb-3 image-group">
+                        <label class="form-label">Upload Detail Interior</label>
+                        <div class="input-group">
+                            <input type="file" name="images[]" class="form-control image-input">
+                            <button type="button" class="btn btn-success add-image">Add</button>
+                        </div>
+                    </div>
+
                 </div>
-                @endfor
+
+                <div class="row mt-3" id="preview-container"></div>
+
         </div>
 
 
@@ -128,6 +136,63 @@
 
     </div>
 </div>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+
+        // ADD MORE IMAGE
+        document.addEventListener("click", function(e) {
+            if (e.target.classList.contains("add-image")) {
+
+                let html = `
+            <div class="mb-3 image-group">
+                <div class="input-group">
+                    <input type="file" name="images[]" class="form-control image-input">
+                    <button type="button" class="btn btn-danger remove-image">Remove</button>
+                </div>
+            </div>`;
+
+                document.getElementById("image-wrapper")
+                    .insertAdjacentHTML("beforeend", html);
+            }
+        });
+
+        // REMOVE IMAGE
+        document.addEventListener("click", function(e) {
+            if (e.target.classList.contains("remove-image")) {
+                e.target.closest(".image-group").remove();
+            }
+        });
+
+        // PREVIEW IMAGE
+        document.addEventListener("change", function(e) {
+            if (e.target.classList.contains("image-input")) {
+
+                let preview = document.getElementById("preview-container");
+                preview.innerHTML = "";
+
+                document.querySelectorAll(".image-input").forEach(input => {
+
+                    if (input.files[0]) {
+                        let reader = new FileReader();
+
+                        reader.onload = function(ev) {
+                            preview.insertAdjacentHTML("beforeend", `
+                            <div class="col-md-3 mb-3">
+                                <img src="${ev.target.result}" 
+                                     class="img-fluid rounded shadow">
+                            </div>
+                        `);
+                        };
+
+                        reader.readAsDataURL(input.files[0]);
+                    }
+                });
+            }
+        });
+
+    });
+</script>
+
 
 </div>
 @endsection
