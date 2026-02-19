@@ -36,23 +36,23 @@ class UnitAdminController extends Controller
             'images.*' => 'image|mimes:jpg,jpeg,png,webp|max:2048',
         ]);
 
-        // helper upload biar rapi
-        $upload = function ($field) use ($r) {
+        // Pastikan folder unit ada di public_html
+        $tujuan = $_SERVER['DOCUMENT_ROOT'] . '/unit';
 
-            if ($r->hasFile('foto')) {
-                $file = $r->file('foto');
-                $namaFile = time() . '_' . $file->getClientOriginalName();
-                $file->move($_SERVER['DOCUMENT_ROOT'] . '/unit', $namaFile);
+        if (!file_exists($tujuan)) {
+            mkdir($tujuan, 0755, true);
+        }
 
-                $data['foto'] = $namaFile;
-            }
+        // ====== UPLOAD FOTO UTAMA ======
+        $namaFoto = null;
 
+        if ($r->hasFile('foto')) {
+            $file = $r->file('foto');
+            $namaFoto = time() . '_foto_' . $file->getClientOriginalName();
+            $file->move($tujuan, $namaFoto);
+        }
 
-            return null;
-        };
-
-
-        // ✅ 1. Simpan unit dulu
+        // ====== SIMPAN DATA UNIT ======
         $unit = Unit::create([
             'nama' => $r->nama,
             'luas_tanah' => $r->luas_tanah,
@@ -70,20 +70,20 @@ class UnitAdminController extends Controller
             'pintu' => $r->pintu,
             'jendela' => $r->jendela,
             'harga' => str_replace('.', '', $r->harga),
-
-            'foto' => $upload('foto'),
-            'denah' => $upload('denah'),
+            'foto' => $namaFoto,
         ]);
 
-        // ✅ 2. Simpan gallery unlimited
+        // ====== UPLOAD GALLERY ======
         if ($r->hasFile('images')) {
             foreach ($r->file('images') as $img) {
 
-                $path = $img->store('units', 'public');
+                $namaGallery = time() . '_gallery_' . $img->getClientOriginalName();
+
+                $img->move($tujuan, $namaGallery);
 
                 UnitImage::create([
                     'unit_id' => $unit->id,
-                    'image' => $path
+                    'image' => $namaGallery
                 ]);
             }
         }
@@ -91,6 +91,7 @@ class UnitAdminController extends Controller
         return redirect('/admin/units')
             ->with('success', 'Unit berhasil ditambahkan');
     }
+
 
 
     // ================== FORM EDIT ==================
@@ -111,30 +112,38 @@ class UnitAdminController extends Controller
             'luas_bangunan' => 'required',
             'kt' => 'required',
             'km' => 'required',
+            'foto' => 'image',
+            'images.*' => 'image|mimes:jpg,jpeg,png,webp|max:2048',
         ]);
 
-        // ================= UPDATE FOTO =================
-        $upload = function ($field, $oldFile = null) use ($r) {
-            if ($r->hasFile($field)) {
+        $tujuan = $_SERVER['DOCUMENT_ROOT'] . '/unit';
 
-                // hapus file lama
-                if ($oldFile && \Storage::disk('public')->exists($oldFile)) {
-                    \Storage::disk('public')->delete($oldFile);
-                }
+        if (!file_exists($tujuan)) {
+            mkdir($tujuan, 0755, true);
+        }
 
-                return $r->file($field)->store('unit', 'public');
+        // ====== UPDATE FOTO UTAMA ======
+        $namaFoto = $unit->foto;
+
+        if ($r->hasFile('foto')) {
+
+            // hapus foto lama kalau ada
+            if ($unit->foto && file_exists($tujuan . '/' . $unit->foto)) {
+                unlink($tujuan . '/' . $unit->foto);
             }
-            return $oldFile;
-        };
 
-        // ================= UPDATE DATA UNIT =================
+            $file = $r->file('foto');
+            $namaFoto = time() . '_foto_' . $file->getClientOriginalName();
+            $file->move($tujuan, $namaFoto);
+        }
+
+        // ====== UPDATE DATA ======
         $unit->update([
             'nama' => $r->nama,
             'luas_tanah' => $r->luas_tanah,
             'luas_bangunan' => $r->luas_bangunan,
             'kt' => $r->kt,
             'km' => $r->km,
-
             'listrik' => $r->listrik,
             'air' => $r->air,
             'lantai' => $r->lantai,
@@ -145,42 +154,29 @@ class UnitAdminController extends Controller
             'sanitary' => $r->sanitary,
             'pintu' => $r->pintu,
             'jendela' => $r->jendela,
-
-            'foto' => $upload('foto', $unit->foto),
-            'denah' => $upload('denah', $unit->denah),
+            'harga' => str_replace('.', '', $r->harga),
+            'foto' => $namaFoto,
         ]);
 
-        // ================= HAPUS INTERIOR =================
-        if ($r->delete_images) {
-            foreach ($r->delete_images as $imgId) {
-
-                $img = UnitImage::find($imgId);
-
-                if ($img) {
-                    if (\Storage::disk('public')->exists($img->image)) {
-                        \Storage::disk('public')->delete($img->image);
-                    }
-
-                    $img->delete();
-                }
-            }
-        }
-
-        // ================= TAMBAH INTERIOR =================
+        // ====== TAMBAH GALLERY BARU ======
         if ($r->hasFile('images')) {
             foreach ($r->file('images') as $img) {
 
-                $path = $img->store('units', 'public');
+                $namaGallery = time() . '_gallery_' . $img->getClientOriginalName();
+
+                $img->move($tujuan, $namaGallery);
 
                 UnitImage::create([
                     'unit_id' => $unit->id,
-                    'image' => $path
+                    'image' => $namaGallery
                 ]);
             }
         }
 
-        return redirect('/admin/units')->with('success', 'Unit berhasil diupdate');
+        return redirect('/admin/units')
+            ->with('success', 'Unit berhasil diupdate');
     }
+
 
 
 
