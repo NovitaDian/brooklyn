@@ -106,6 +106,7 @@ class UnitAdminController extends Controller
     {
         $unit = Unit::findOrFail($id);
 
+        
         $r->validate([
             'nama' => 'required',
             'luas_tanah' => 'required',
