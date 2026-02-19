@@ -39,16 +39,14 @@ class UnitAdminController extends Controller
         // helper upload biar rapi
         $upload = function ($field) use ($r) {
 
-            if ($r->hasFile($field)) {
+            if ($r->hasFile('foto')) {
+                $file = $r->file('foto');
+                $namaFile = time() . '_' . $file->getClientOriginalName();
+                $file->move($_SERVER['DOCUMENT_ROOT'] . '/unit', $namaFile);
 
-                $file = $r->file($field);
-
-                $namaFile = time() . '_' . $field . '.' . $file->getClientOriginalExtension();
-
-                $file->move(public_path('unit'), $namaFile);
-
-                return $namaFile;
+                $data['foto'] = $namaFile;
             }
+
 
             return null;
         };

@@ -30,7 +30,7 @@
                     <tr class="table-row">
                         <td>
 
-                            <img src="{{ asset('storage/unit/'.$u->foto) }}">
+                            <img src="{{ asset('unit/'.$u->foto) }}">
                         </td>
 
                         <td class="fw-semibold">
