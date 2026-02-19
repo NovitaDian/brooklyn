@@ -29,8 +29,7 @@
                     @foreach($units as $u)
                     <tr class="table-row">
                         <td>
-                            <img src="{{ asset('unit/'.$u->foto) }}"
-                            class="unit-img">
+                            <img src="{{ asset('brooklyn/storage/app/unit/'.$u->foto) }}" class="unit-img">
                         </td>
 
                         <td class="fw-semibold">
