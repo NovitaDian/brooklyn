@@ -45,16 +45,16 @@
         @csrf
         <div class="row">
             <div class="col-md-3">
-                <input type="text" name="nama_unit" class="form-control" placeholder="Nama Unit">
+                <input type="text" name="nama_unit" class="form-control" placeholder="Nama Unit" required>
             </div>
             <div class="col-md-2">
-                <input type="number" step="0.01" name="x" id="x" class="form-control" placeholder="X %">
+                <input type="number" step="0.01" name="x" id="x" class="form-control" placeholder="X %" readonly>
             </div>
             <div class="col-md-2">
-                <input type="number" step="0.01" name="y" id="y" class="form-control" placeholder="Y %">
+                <input type="number" step="0.01" name="y" id="y" class="form-control" placeholder="Y %" readonly>
             </div>
             <div class="col-md-3">
-                <select name="status" class="form-control">
+                <select name="status" class="form-control" required>
                     <option value="dijual">Dijual</option>
                     <option value="booked">Booked</option>
                     <option value="build">Build</option>
