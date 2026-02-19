@@ -156,7 +156,7 @@ $wa = '6282324898151';
             <div class="catalog-item">
 
                 <div class="item-img">
-                    <img src="{{ $u->foto ? asset('unit/'.$u->foto) : asset('images/no-image.png') }}">
+                    <img src="{{ $u->foto ? asset('storage/unit/'.$u->foto) : asset('images/no-image.png') }}">
                 </div>
 
                 <div class="item-info">
