@@ -37,11 +37,21 @@ class UnitController extends Controller
             'foto' => 'required|image',
         ]);
 
-        // function kecil biar rapi
+        // function upload ke public
         $upload = function ($field) use ($r) {
-            return $r->hasFile($field)
-                ? $r->file($field)->store('unit', 'public')
-                : null;
+
+            if ($r->hasFile($field)) {
+
+                $file = $r->file($field);
+
+                $namaFile = time() . '_' . $field . '.' . $file->getClientOriginalExtension();
+
+                $file->move(public_path('unit'), $namaFile);
+
+                return $namaFile; // simpan nama file saja ke database
+            }
+
+            return null;
         };
 
         Unit::create([
@@ -73,6 +83,7 @@ class UnitController extends Controller
 
         return redirect('/admin/units')->with('success', 'Unit berhasil ditambahkan');
     }
+
 
 
     /**
