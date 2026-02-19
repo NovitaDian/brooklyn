@@ -48,11 +48,12 @@ class UnitController extends Controller
 
                 $file->move(public_path('unit'), $namaFile);
 
-                return $namaFile; // simpan nama file saja ke database
+                return $namaFile;
             }
 
             return null;
         };
+
 
         Unit::create([
             'nama' => $r->nama,
