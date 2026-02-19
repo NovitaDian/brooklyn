@@ -38,10 +38,21 @@ class UnitAdminController extends Controller
 
         // helper upload biar rapi
         $upload = function ($field) use ($r) {
-            return $r->hasFile($field)
-                ? $r->file($field)->store('unit', 'public')
-                : null;
+
+            if ($r->hasFile($field)) {
+
+                $file = $r->file($field);
+
+                $namaFile = time() . '_' . $field . '.' . $file->getClientOriginalExtension();
+
+                $file->move(public_path('unit'), $namaFile);
+
+                return $namaFile;
+            }
+
+            return null;
         };
+
 
         // ✅ 1. Simpan unit dulu
         $unit = Unit::create([
